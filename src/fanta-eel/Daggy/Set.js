@@ -41,8 +41,8 @@ const indexOf = x => (xs) => {
   return -1
 }
 
-// nub :: Setoid a => [a] -> [a]
-const nub = xs => xs.filter((x, i) => indexOf(x)(xs) === i)
+// removeDuplicates :: Setoid a => [a] -> [a]
+const removeDuplicates = xs => xs.filter((x, i) => indexOf(x)(xs) === i)
 
 // includes :: Setoid a => a -> [a] -> Number
 const includes = x => compose(isNotEqual(-1), indexOf(x))
@@ -72,7 +72,7 @@ const PaulSet = daggy.taggedSum('PaulSet', { Set: ['xs'] })
 
 // could this be considered to be a natural transformation??
 // from :: Setoid a => PaulSet ~> Array a -> PaulSet a
-PaulSet.from = compose(PaulSet.Set, nub)
+PaulSet.from = compose(PaulSet.Set, removeDuplicates)
 
 // toArray :: PaulSet a ~> () -> Array a
 PaulSet.prototype.toArray = function () {
@@ -112,7 +112,7 @@ PaulSet.prototype.cardinality = function () {
 // map :: PaulSet a ~> (a -> b) -> PaulSet b
 PaulSet.prototype.map = function (f) {
   return this.cata({
-    Set: compose(nub, map(f)),
+    Set: compose(removeDuplicates, map(f)),
   })
 }
 

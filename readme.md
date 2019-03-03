@@ -64,6 +64,10 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - I might be able to use that jsverify thing that I've seen lying around
 - Perhaps add tests for some of my other things
 - Finish off work on PaulSet and the Setoid type in general
+  - Should probably not use the tagged sum thing
+  - originally I used it for my set because I thought the empty set should kind of be its own thing
+  - removing it would get rid of the cata boiler plate so it's probs worth it
+  - I wonder if I could use an applicative for when I'm mapping over a map when I'm verifying that the map method on `PaulSet` does what I want
 - Move on to the next thing in Tom's blog: Ords!
 - Consider using something other than lodash/fp
   - Although it is good to use what I use at work every day probably
