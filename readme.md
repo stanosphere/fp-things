@@ -1,8 +1,10 @@
 # FP Things
 
-This repo is going to be quite messy for now. It's basically just me playing around with functional programming things in JavaScript. I think a lot of this might just end up as me taking notes about things and also implementing some lovely functional stuff of my own. The main resources I've been using are:
+This repo is going to be quite messy for now. It's basically just me playing around with functional programming things in JavaScript. I think a lot of this might just end up as me taking notes about things and also implementing some lovely functional stuff of my own. 
 
-- Mostly Adequate Guide to Functional Programming
+## Resources
+
+- **Mostly Adequate Guide to Functional Programming**
   - https://github.com/MostlyAdequate/mostly-adequate-guide 
   - This is a great book
   - It starts out by explaining how we can write programs using nothing more than functions and compositions
@@ -13,19 +15,33 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - https://github.com/fantasyland/fantasy-land
   - This is a specification for all the usual Algebraic Data Types in JavaScript
 
-- Fantas, Eel, and Specification blog by Tom Harding
+- **Fantas, Eel, and Specification blog by Tom Harding**
   - http://www.tomharding.me/2017/03/03/fantas-eel-and-specification/
   - This is actually amazing
   - Kind of gives an overview of all these wonderful things from scratch
   - Seems to go through the **Fantasy Land Spec** and try to explain it to normal people like me
 
+- Daggy
+  - https://github.com/fantasyland/daggy
+  - Lets you create **Sum Types** in JS
+  - I use it becasue it's in the fantas blog. Also it is pretty cool
+
 - Project Awesome 
   - https://project-awesome.org/stoeffel/awesome-fp-js
   - A rather eclectic list of fp resources that I have found useful :) 
 
+- Fira Code
+  - https://github.com/tonsky/FiraCode
+  - This literally just makes my arrows look pretty
+
+- lodash/fp
+  - https://github.com/lodash/lodash/wiki/FP-Guide
+  - For all the ususal fp utils
+  - My main reason for using this is that it's what I've used in both my jobs
+
 ## What is here?
 
-- algebraic-data-structure
+- algebraic-data-structures
   - I've basically stolen all the things from the mostly adequate guide
   - I've probably changed and added to them a bit
   - There are also some probably incomprehensible things that are me trying to figure out what on Earth is going on
@@ -49,3 +65,5 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 - Perhaps add tests for some of my other things
 - Finish off work on PaulSet and the Setoid type in general
 - Move on to the next thing in Tom's blog: Ords!
+- Consider using something other than lodash/fp
+  - Although it is good to use what I use at work every day probably

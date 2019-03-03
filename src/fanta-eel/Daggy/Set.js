@@ -104,7 +104,6 @@ PaulSet.prototype.map = function (f) {
   })
 }
 
-
 // numbersToNums :: [Number] -> [Num]
 const numbersToNums = map(unary(Num))
 
