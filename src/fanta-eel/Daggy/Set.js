@@ -53,7 +53,7 @@ const addToArray = x => xs => (includes(x)(xs) ? xs : [...xs, x])
 // removeFromArray :: Setoid a => a -> [a] -> [a]
 const removeFromArray = compose(filter, not, equals)
 
-// arraysAreEqual :: Setoid a => a -> a -> Bool
+// arraysAreEqual :: Setoid a => [a] -> [a] -> Bool
 const arraysAreEqual = xs => (ys) => {
   if (!xs || !ys) return false
   if (xs.length !== ys.length) return false
@@ -73,6 +73,16 @@ const PaulSet = daggy.taggedSum('PaulSet', { Set: ['xs'] })
 // could this be considered to be a natural transformation??
 // from :: Setoid a => PaulSet ~> Array a -> PaulSet a
 PaulSet.from = compose(PaulSet.Set, removeDuplicates)
+
+// empty :: () -> PaulSet ()
+PaulSet.empty = () => PaulSet.from([])
+
+// remove :: Setoid a => PaulSet a ~> a -> PaulSet a
+PaulSet.prototype.cardinality = function () {
+  return this.cata({
+    Set: get('length'),
+  })
+}
 
 // toArray :: PaulSet a ~> () -> Array a
 PaulSet.prototype.toArray = function () {
@@ -99,13 +109,6 @@ PaulSet.prototype.add = function (x) {
 PaulSet.prototype.remove = function (x) {
   return this.cata({
     Set: compose(PaulSet.Set, removeFromArray(x)),
-  })
-}
-
-// remove :: Setoid a => PaulSet a ~> a -> PaulSet a
-PaulSet.prototype.cardinality = function () {
-  return this.cata({
-    Set: get('length'),
   })
 }
 
@@ -278,3 +281,5 @@ console.log(
   theSameNestedSet.equals(theSameNestedSet),
   nestedSet.equals(nestedSet),
 )
+
+module.exports = PaulSet

@@ -3,5 +3,8 @@ module.exports = {
   "rules": {
     "semi": ["error", "never"],
     "func-names": "off"
+  },
+  "env": {
+    "jest": true
   }
 };
