@@ -35,12 +35,12 @@ class Maybe {
   }
 
   // ----- Monad Maybe
-  // chain :: Monad M => (a -> M b) -> M a -> M b
+  // chain :: Monad m => (a -> m b) -> m a -> m b
   chain(fn) {
     return this.map(fn).join()
   }
 
-  // join :: Monad M => M (M a) ~> M a
+  // join :: Monad m => m (m a) ~> m a
   join() {
     return this.isNothing ? this : this.$value
   }

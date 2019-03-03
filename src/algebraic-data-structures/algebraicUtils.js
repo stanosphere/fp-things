@@ -3,10 +3,10 @@ const { Left } = require('./index')
 // map :: Functor f => (a -> b) -> f a -> f b
 const map = fn => f => f.map(fn)
 
-// chain :: Monad M => (a -> M b) -> M a -> M b
+// chain :: monad m => (a -> m b) -> m a -> m b
 const chain = fn => m => m.chain(fn)
 
-// join :: Monad M => M (M a) -> M a
+// join :: monad m => m (m a) -> m a
 const join = m => m.join()
 
 // sequence :: (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
