@@ -36,7 +36,6 @@ const isSetoid = x => !!x.equals
 const indexOf = x => (xs) => {
   for (let i = 0; i < xs.length; i += 1) {
     const elem = xs[i]
-    // console.log(elem, isSetoid(elem))
     if (isSetoid(elem) && elem.equals(x)) return i
   }
   return -1
@@ -54,8 +53,21 @@ const addToArray = x => xs => (includes(x)(xs) ? xs : [...xs, x])
 // removeFromArray :: Setoid a => a -> [a] -> [a]
 const removeFromArray = compose(filter, not, equals)
 
+// arraysAreEqual :: Setoid a => a -> a -> Bool
+const arraysAreEqual = xs => (ys) => {
+  if (!xs || !ys) return false
+  if (xs.length !== ys.length) return false
+  // this is a slow way of doing it. Perhaps I should sort first
+  for (let i = 0; i < xs.length; i += 1) {
+    const x = xs[i]
+    if (not(includes(x))(ys)) return false
+  }
+  return true
+}
+
 // don't want to be overwriting the ES6 Set
 // it is perhaps easiest top base this on our lovely native Array
+// don't actually need the Sum Type here lol
 const PaulSet = daggy.taggedSum('PaulSet', { Set: ['xs'] })
 
 // could this be considered to be a natural transformation??
@@ -101,6 +113,14 @@ PaulSet.prototype.cardinality = function () {
 PaulSet.prototype.map = function (f) {
   return this.cata({
     Set: compose(nub, map(f)),
+  })
+}
+
+// equals :: Setoid a => PaulSet a ~> PaulSet a -> Bool
+PaulSet.prototype.equals = function (otherSet) {
+  const ys = otherSet.xs
+  return this.cata({
+    Set: arraysAreEqual(ys),
   })
 }
 
@@ -185,6 +205,7 @@ console.log(
     .map(num => num.map(x => x * 2)),
 )
 
+// Could we use applicatives here??
 console.log(
   'can we map over a set where we expect it to shrink in size?',
   emptySet
@@ -192,4 +213,68 @@ console.log(
     .add(Num(-1))
     .add(Num(2))
     .map(num => num.map(x => x * x)),
+)
+
+const mySet = emptySet
+  .add(Num(1))
+  .add(Num(-1))
+  .add(Num(0))
+
+console.log(
+  'is a set equal to itself?',
+  mySet.equals(mySet),
+)
+
+const mySetWithDifferentOrder = emptySet
+  .add(Num(-1))
+  .add(Num(0))
+  .add(Num(1))
+
+console.log(
+  'is a set equal to itself if the elements are added in a different order?',
+  mySet.equals(mySetWithDifferentOrder),
+  mySetWithDifferentOrder.equals(mySet),
+
+)
+
+console.log(
+  'is the empty set equal to itself',
+  emptySet.equals(emptySet),
+)
+
+const myOtherSet = emptySet
+  .add(Num(2))
+  .add(Num(-1))
+  .add(Num(0))
+
+console.log(
+  'does equals return false for two different sets?',
+  mySet.equals(myOtherSet),
+  myOtherSet.equals(mySet),
+  mySet.equals(emptySet),
+  emptySet.equals(mySet),
+)
+
+const simplenNstedSet = emptySet.add(emptySet)
+
+const nestedSet = emptySet
+  .add(Num(7))
+  .add(mySet)
+  .add(emptySet)
+  .add(myOtherSet)
+
+const theSameNestedSet = emptySet
+  .add(emptySet)
+  .add(mySetWithDifferentOrder)
+  .add(myOtherSet)
+  .add(Num(7))
+
+
+console.log(
+  'does equals return true for nested sets that are equal to each other?',
+  simplenNstedSet.equals(simplenNstedSet),
+  theSameNestedSet.equals(nestedSet),
+  nestedSet.equals(theSameNestedSet),
+  theSameNestedSet.equals(theSameNestedSet),
+  nestedSet.equals(nestedSet),
 )
