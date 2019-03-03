@@ -20,8 +20,8 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - Seems to go through the **Fantasy Land Spec** and try to explain it to normal people like me
 
 - Project Awesome 
- - https://project-awesome.org/stoeffel/awesome-fp-js
- - A rather eclectic list of fp resources that I have found useful :) 
+  - https://project-awesome.org/stoeffel/awesome-fp-js
+  - A rather eclectic list of fp resources that I have found useful :) 
 
 ## What is here?
 
