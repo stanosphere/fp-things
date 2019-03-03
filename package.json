@@ -1,0 +1,16 @@
+{
+  "name": "fp-things",
+  "version": "1.0.0",
+  "description": "functional programming in javascript",
+  "author": "Paul Stanford",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "daggy": "^1.4.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "eslint": "^5.14.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  }
+}
