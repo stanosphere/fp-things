@@ -6,7 +6,7 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - https://github.com/MostlyAdequate/mostly-adequate-guide 
   - This is a great book
   - It starts out by explaining how we can write programs using nothing more than functions and compositions
-  - And eventually gets into the mysterious land of *Algebraic Data Types* 
+  - And eventually gets into the mysterious land of **Algebraic Data Types**
   - It draws a lot of inspiration in the latter chapters from https://github.com/fantasyland/fantasy-land
 
 - Fantasy Land
@@ -17,11 +17,29 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - http://www.tomharding.me/2017/03/03/fantas-eel-and-specification/
   - This is actually amazing
   - Kind of gives an overview of all these wonderful things from scratch
-  - Seems to go through the *Fantasy Land Spec* and try to explain it to normal people like me
+  - Seems to go through the **Fantasy Land Spec** and try to explain it to normal people like me
 
 - Project Awesome 
  - https://project-awesome.org/stoeffel/awesome-fp-js
  - A rather eclectic list of fp resources that I have found useful :) 
+
+## What is here?
+
+- algebraic-data-structure
+  - I've basically stolen all the things from the mostly adequate guide
+  - I've probably changed and added to them a bit
+  - There are also some probably incomprehensible things that are me trying to figure out what on Earth is going on
+
+- fanta-eel
+  - Notes on Tom Harding's blog
+  - I'll hopefully end up doing some more of his exercises
+  - I've probably also just generally messed around with stuff
+
+- scripts
+  - Not gonna lie, I intend for this folder to be an absolute mess
+  - It'll probably be the first place I go when I don't understand stuff
+  - And I would quite like to have a reference to things I struggle with
+  - Becasue I'll probably struggle with them again
 
 ## To Do (3/3/19)
 
