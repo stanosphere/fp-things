@@ -71,3 +71,9 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 - Move on to the next thing in Tom's blog: Ords!
 - Consider using something other than lodash/fp
   - Although it is good to use what I use at work every day probably
+- Modify List.equal so it doesn't break if the lists have different lengths
+- Think about how you might test List's lte
+- Create an `OrderedSet`
+- Refactor PaulSet so that it uses an ordered list rather than an array as its internal structure
+ - caveat: it would need the `Ord` type constraint rather than the more general `Setoid` type constraint. And I like generality lol
+ - In that case I think it may be sensible just to do the ordered set thing!

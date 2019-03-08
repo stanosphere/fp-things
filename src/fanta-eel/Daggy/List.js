@@ -15,6 +15,18 @@ List.prototype.map = function (f) {
   })
 }
 
+// Check the lists' heads, then their tails
+// equals :: Setoid a => List a ~> List a -> Bool
+List.prototype.equals = function (that) {
+  return this.cata({
+    // Note the two different Setoid uses:
+    Cons: (head, tail) => head.equals(that.head) // a
+        && tail.equals(that.tail), // List a
+
+    Nil: () => that.is(List.Nil),
+  })
+}
+
 // .= := =>> >>= =<< --> ->> ||= <> |> <| *** :< :> 9:45
 
 // from :: List ~> Array a -> List a
