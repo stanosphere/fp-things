@@ -84,5 +84,13 @@ describe('helpers', () => {
         sortedArr,
       )
     })
+    it('given a maximally unsorted array of Ords it should return a sorted array', () => {
+      const arr = numbersToNums([4, 3, 2, 1])
+      const sortedArr = numbersToNums([1, 2, 3, 4])
+      assert.deepStrictEqual(
+        sortArrayOfOrds(arr),
+        sortedArr,
+      )
+    })
   })
 })

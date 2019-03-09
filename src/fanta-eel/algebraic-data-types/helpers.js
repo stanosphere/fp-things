@@ -50,14 +50,26 @@ const addToArray = x => xs => (includes(x)(xs) ? xs : [...xs, x])
 // removeFromArray :: Setoid a => a -> [a] -> [a]
 const removeFromArray = compose(filter, not, equals)
 
-// arraysAreEqual :: Setoid a => [a] -> [a] -> Bool
-const arraysAreEqual = xs => (ys) => {
+// arraysHaveTheSameContent :: Setoid a => [a] -> [a] -> Bool
+const arraysHaveTheSameContent = xs => (ys) => {
   if (!xs || !ys) return false
   if (xs.length !== ys.length) return false
   // this is a slow way of doing it. Perhaps I should sort first
   for (let i = 0; i < xs.length; i += 1) {
     const x = xs[i]
     if (not(includes(x))(ys)) return false
+  }
+  return true
+}
+
+// arraysAreEqual :: Setoid a => [a] -> [a] -> Bool
+const arraysAreEqual = xs => (ys) => {
+  if (!xs || !ys) return false
+  if (xs.length !== ys.length) return false
+  for (let i = 0; i < xs.length; i += 1) {
+    const x = xs[i]
+    const y = ys[i]
+    if (isNotEqual(x)(y)) return false
   }
   return true
 }
@@ -79,13 +91,19 @@ const paulSetOfNumsToNumbers = compose(map(toNumber), toArray)
 // insertInSortedArray :: Ord a => a -> [a] -> [a]
 const insertInSortedArray = x => (xs) => {
   let foundPlace = false
-  const xIsLessThanOrEqualTo = q => x.lte(q)
+  const xIsEqualTo = q => x.equals(q)
+  const xIsLessThan = q => x.lte(q) && !xIsEqualTo(q)
   const atFinalPosition = j => j === xs.length - 1
   return xs.reduce((ys, y, i) => {
-    if (!foundPlace && xIsLessThanOrEqualTo(y)) {
+    if (!foundPlace && xIsEqualTo(y)) {
+      foundPlace = true
+      return [...ys, y]
+    }
+    if (!foundPlace && xIsLessThan(y)) {
       foundPlace = true
       return [...ys, x, y]
-    } if (!foundPlace && atFinalPosition(i)) {
+    }
+    if (!foundPlace && atFinalPosition(i)) {
       return [...ys, y, x]
     }
     return [...ys, y]
@@ -101,6 +119,7 @@ const sortArrayOfOrds = sort(not2(lte))
 module.exports = {
   addToArray,
   arraysAreEqual,
+  arraysHaveTheSameContent,
   includes,
   insertInSortedArray,
   indexOf,

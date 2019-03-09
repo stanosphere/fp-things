@@ -26,6 +26,4 @@ Num.prototype.map = function (f) {
   return Num(f(this.x))
 }
 
-console.log(Num(2).equals(Num(2)))
-
 module.exports = Num

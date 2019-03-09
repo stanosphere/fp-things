@@ -10,11 +10,12 @@ const {
   get,
 } = require('lodash/fp')
 const {
-  addToArray,
   arraysAreEqual,
   includes,
+  insertInSortedArray,
   removeDuplicates,
   removeFromArray,
+  sortArrayOfOrds,
 } = require('./helpers')
 
 // OrderedSet will be a collection of Ords
@@ -22,7 +23,7 @@ const OrderedSet = daggy.taggedSum('OrderedSet', { Set: ['xs'] })
 
 // could this be considered to be a natural transformation??
 // from :: Ord a => OrderedSet ~> Array a -> OrderedSet a
-OrderedSet.from = compose(OrderedSet.Set, removeDuplicates)
+OrderedSet.from = compose(OrderedSet.Set, sortArrayOfOrds, removeDuplicates)
 
 // empty :: () -> OrderedSet ()
 OrderedSet.empty = () => OrderedSet.from([])
@@ -30,7 +31,7 @@ OrderedSet.empty = () => OrderedSet.from([])
 // add :: Ord a => OrderedSet a ~> a -> OrderedSet a
 OrderedSet.prototype.add = function (x) {
   return this.cata({
-    Set: compose(OrderedSet.Set, addToArray(x)),
+    Set: compose(OrderedSet.Set, insertInSortedArray(x)),
   })
 }
 
@@ -59,7 +60,12 @@ OrderedSet.prototype.has = function (x) {
 // map :: OrderedSet a ~> (a -> b) -> OrderedSet b
 OrderedSet.prototype.map = function (f) {
   return this.cata({
-    Set: compose(OrderedSet.Set, removeDuplicates, map(f)),
+    Set: compose(
+      OrderedSet.Set,
+      removeDuplicates,
+      sortArrayOfOrds,
+      map(f),
+    ),
   })
 }
 

@@ -11,7 +11,7 @@ const {
 } = require('lodash/fp')
 const {
   addToArray,
-  arraysAreEqual,
+  arraysHaveTheSameContent,
   includes,
   removeDuplicates,
   removeFromArray,
@@ -51,7 +51,7 @@ PaulSet.prototype.cardinality = function () {
 PaulSet.prototype.equals = function (otherSet) {
   const ys = otherSet.xs
   return this.cata({
-    Set: arraysAreEqual(ys),
+    Set: arraysHaveTheSameContent(ys),
   })
 }
 
