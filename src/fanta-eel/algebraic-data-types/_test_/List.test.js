@@ -1,5 +1,5 @@
 const { compose } = require('lodash/fp')
-const assert = require('assert')
+// const assert = require('assert')
 const List = require('../List')
 const { numbersToNums } = require('../helpers')
 const { assertEquals } = require('./testHelpers')

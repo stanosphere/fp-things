@@ -6,6 +6,7 @@ const {
   map,
   // identity :: a -> a
   identity,
+  // get :: String -> Object -> Object | String
   get,
 } = require('lodash/fp')
 const Num = require('./Num')

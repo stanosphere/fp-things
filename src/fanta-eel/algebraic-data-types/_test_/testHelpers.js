@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { equals } = require('../helpers')
+const { equals } = require('../algebraic-data-methods')
 
 
 // assertEquals :: Setoid a, Setaoid b => b a -> b a -> Void

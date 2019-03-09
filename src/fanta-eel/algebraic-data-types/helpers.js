@@ -10,6 +10,7 @@ const {
   // filter :: (a -> Bool) -> [a] -> [a]
   filter,
 } = require('lodash/fp')
+const { equals } = require('./algebraic-data-methods')
 const Num = require('./Num')
 
 // not :: (a -> Bool) -> a -> Bool
@@ -18,9 +19,6 @@ const not = f => x => !f(x)
 // this uses conventional equality rather than setoid equality
 // isNotEqual :: a -> b -> Bool
 const isNotEqual = compose(not, isEqual)
-
-// equals :: Setoid a => a -> a -> Bool
-const equals = x => y => x.equals(y)
 
 // isSetoid :: a -> Bool
 const isSetoid = x => !!x.equals
@@ -67,7 +65,6 @@ const paulSetOfNumsToNumbers = ps => map(x => x.toNumber())(ps.toArray())
 module.exports = {
   addToArray,
   arraysAreEqual,
-  equals,
   includes,
   indexOf,
   isNotEqual,
