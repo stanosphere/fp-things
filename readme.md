@@ -75,13 +75,12 @@ This repo is going to be quite messy for now. It's basically just me playing aro
     - 2) Implement `concat` as a set **union**
 - I might be able to use that `jsverify` thing that I've seen lying around
 - Perhaps add tests for some of my other things
-- Finish off work on PaulSet and the Setoid type in general
-  - Should probably not use the tagged sum thing
-  - originally I used it for my set because I thought the empty set should kind of be its own thing
-  - removing it would get rid of the cata boiler plate so it's probs worth it
   - I wonder if I could use an applicative for when I'm mapping over a map when I'm verifying that the map method on `PaulSet` does what I want
 - Modify List.equal so it doesn't break if the lists have different lengths
-- Think about how you might test List's lte
+- Think about how you might test List's `lte`
 - Implement a `powerSet` method on `PaulSet`
 - Create an `OrderedSet`
   - I _could_ give it an ordered list as its internal structure actually
+- `OrderedSet`
+  - I wonder if a binary search would be useful for element insetrtion
+    - https://github.com/dsernst/data-structures/blob/master/sprint-two/src/bTree.js

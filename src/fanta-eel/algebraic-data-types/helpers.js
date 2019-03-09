@@ -69,10 +69,28 @@ const toArray = ps => ps.toArray()
 // paulSetOfNumsToArrayOfNumbers :: PaulSet Num -> [Number]
 const paulSetOfNumsToNumbers = compose(map(toNumber), toArray)
 
+// this is horribly inefficient since we always iterate through the entire array
+// insertInSortedArray :: Ord a => a -> [a] -> [a]
+const insertInSortedArray = x => (xs) => {
+  let foundPlace = false
+  const xIsLessThanOrEqualTo = q => x.lte(q)
+  const atFinalPosition = j => j === xs.length - 1
+  return xs.reduce((ys, y, i) => {
+    if (!foundPlace && xIsLessThanOrEqualTo(y)) {
+      foundPlace = true
+      return [...ys, x, y]
+    } if (!foundPlace && atFinalPosition(i)) {
+      return [...ys, y, x]
+    }
+    return [...ys, y]
+  }, [])
+}
+
 module.exports = {
   addToArray,
   arraysAreEqual,
   includes,
+  insertInSortedArray,
   indexOf,
   isNotEqual,
   isSetoid,

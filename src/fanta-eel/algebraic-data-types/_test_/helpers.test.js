@@ -4,6 +4,7 @@ const Num = require('../Num')
 const {
   addToArray,
   includes,
+  insertInSortedArray,
   numbersToNums,
   removeDuplicates,
 } = require('../helpers.js')
@@ -44,6 +45,24 @@ describe('helpers', () => {
     it('should do nothing to an array where all items are indeed unique', () => {
       const arr = numbersToNums([1, 2, 3, 5, 8, 13])
       assert.deepStrictEqual(removeDuplicates(arr), arr)
+    })
+  })
+
+  describe('insertInSortedArray', () => {
+    // insertInSortedArray :: Ord a => a -> [a] -> [a]
+    it('given a sorted array it should insert an element at the front if the element is smaller than everything', () => {
+      const sortedArr = numbersToNums([1, 2, 3, 4])
+      assert.deepStrictEqual(
+        insertInSortedArray(Num(0))(sortedArr),
+        numbersToNums([0, 1, 2, 3, 4]),
+      )
+    })
+    it('given a sorted array it should insert an element at the end if the element is bigger than everything', () => {
+      const sortedArr = numbersToNums([1, 2, 3, 4])
+      assert.deepStrictEqual(
+        insertInSortedArray(Num(5))(sortedArr),
+        numbersToNums([1, 2, 3, 4, 5]),
+      )
     })
   })
 })
