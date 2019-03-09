@@ -2,8 +2,8 @@ const { compose } = require('lodash/fp')
 const assert = require('assert')
 const OrderedSet = require('../OrderedSet')
 const Num = require('../Num')
-const { numbersToNums } = require('../helpers')
-const { assertEquals } = require('./testHelpers')
+const { numbersToNums, toNumber } = require('../helpers')
+const { assertEquals, scramble } = require('./testHelpers')
 
 // So I'm going to roughly try and do some property based testing here
 // the idea being to eventually use like js verify or something
@@ -147,7 +147,6 @@ describe('OrderedSet', () => {
     })
     it('sets with the same content are equal', () => {
       const arr = [1, 1, 2, 3, 3, 5, 5, 5, 8, 13]
-      const scramble = xs => xs.sort(Math.random)
       assertEquals(
         compose(numbersToOrderedSet, scramble)(arr),
         numbersToOrderedSet(arr),
@@ -177,6 +176,36 @@ describe('OrderedSet', () => {
     })
     it('atisfies Reflexivity', () => {
       // ...
+    })
+  })
+
+  describe('an ordered set must be ordered', () => {
+    it('should automatically order the elements if constructed from a scrambled array', () => {
+      const someNumbers = scramble([1, 4, 3, 5, 6, 7, 2])
+      // want to compare [Number] to [Number]
+      assert.deepStrictEqual(
+        numbersToOrderedSet(someNumbers)
+          .toArray()
+          .map(toNumber),
+        someNumbers.sort(),
+      )
+    })
+
+    it('should automatically order the elements if if a new ordered set is produced via the map function', () => {
+      const mapFn = x => 1 - x
+      const someNumbers = scramble([1, 4, 3, 5, 6, 7, 2])
+      // I'ts kind of annoying that I have to use map twice here
+      const orderedSetConstructedByMapping = numbersToOrderedSet(someNumbers)
+        .map(n => n.map(mapFn))
+      // want to compare [Number] to [Number]
+      assert.deepStrictEqual(
+        orderedSetConstructedByMapping
+          .toArray()
+          .map(toNumber),
+        someNumbers
+          .map(mapFn)
+          .sort((a, b) => a - b),
+      )
     })
   })
 })

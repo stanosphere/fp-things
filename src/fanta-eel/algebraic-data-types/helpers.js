@@ -131,4 +131,5 @@ module.exports = {
   removeDuplicates,
   removeFromArray,
   sortArrayOfOrds,
+  toNumber,
 }

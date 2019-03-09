@@ -3,7 +3,7 @@ const assert = require('assert')
 const PaulSet = require('../Set')
 const Num = require('../Num')
 const { numbersToNums } = require('../helpers')
-const { assertEquals } = require('./testHelpers')
+const { assertEquals, scramble } = require('./testHelpers')
 
 // So I'm going to roughly try and do some property based testing here
 // the idea being to eventually use like js verify or something
@@ -147,7 +147,6 @@ describe('PaulSet', () => {
     })
     it('sets with the same content are equal', () => {
       const arr = [1, 1, 2, 3, 3, 5, 5, 5, 8, 13]
-      const scramble = xs => xs.sort(Math.random)
       assertEquals(
         compose(numbersToPaulSet, scramble)(arr),
         numbersToPaulSet(arr),
