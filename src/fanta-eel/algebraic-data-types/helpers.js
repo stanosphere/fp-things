@@ -35,7 +35,7 @@ const indexOf = x => (xs) => {
 // removeDuplicates :: Setoid a => [a] -> [a]
 const removeDuplicates = xs => xs.filter((x, i) => indexOf(x)(xs) === i)
 
-// includes :: Setoid a => a -> [a] -> Number
+// includes :: Setoid a => a -> [a] -> Bool
 const includes = x => compose(isNotEqual(-1), indexOf(x))
 
 // addToArray :: Setoid a => a -> [a] -> [a]
@@ -59,8 +59,15 @@ const arraysAreEqual = xs => (ys) => {
 // numbersToNums :: [Number] -> [Num]
 const numbersToNums = map(unary(Num))
 
+// toNumber :: Num Number -> Number
+const toNumber = x => x.toNumber()
+
+// natural transformation?
+// toArray :: Setoid a => PaulSet a -> [a]
+const toArray = ps => ps.toArray()
+
 // paulSetOfNumsToArrayOfNumbers :: PaulSet Num -> [Number]
-const paulSetOfNumsToNumbers = ps => map(x => x.toNumber())(ps.toArray())
+const paulSetOfNumsToNumbers = compose(map(toNumber), toArray)
 
 module.exports = {
   addToArray,

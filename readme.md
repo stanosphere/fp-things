@@ -82,5 +82,6 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - I wonder if I could use an applicative for when I'm mapping over a map when I'm verifying that the map method on `PaulSet` does what I want
 - Modify List.equal so it doesn't break if the lists have different lengths
 - Think about how you might test List's lte
+- Implement a `powerSet` method on `PaulSet`
 - Create an `OrderedSet`
   - I _could_ give it an ordered list as its internal structure actually
