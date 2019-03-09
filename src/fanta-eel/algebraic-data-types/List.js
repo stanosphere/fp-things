@@ -1,4 +1,5 @@
 const daggy = require('daggy')
+const { lte } = require('./algebraic-data-methods')
 
 const List = daggy.taggedSum('List', {
   Cons: ['head', 'tail'], Nil: [],
@@ -40,6 +41,21 @@ List.prototype.equals = function (that) {
 // isEmpty :: List a ~> () -> Bool
 List.prototype.isEmpty = function () {
   return this.equals(List.empty())
+}
+
+// lte :: Ord a => List a ~> List a -> Bool
+List.prototype.lte = function (that) {
+  return this.cata({
+    Cons: (thisHead, thisTail) => that.cata({
+      Cons: (thatHead, thatTail) => (
+        thisHead.equals(thatHead)
+          ? lte(thisTail, thatTail)
+          : lte(thisHead, thatHead)
+      ),
+      Nil: () => false,
+    }),
+    Nil: () => true,
+  })
 }
 
 // map :: List a ~> (a -> b) -> List b
