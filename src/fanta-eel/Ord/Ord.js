@@ -1,6 +1,6 @@
 const {
   List, Num,
-} = require('../Daggy/index')
+} = require('../algebraic-data-types/index')
 
 // This is a fairly obvious extension of our beloved Setoid
 // Basically we implement a methofd to compare sizes of Ords

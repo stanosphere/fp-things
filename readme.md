@@ -69,6 +69,10 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 
 - Make notes on the Semi group
   - implement `concat` on the stuff that it can be implemented on
+  - promote `PaulSet` to a semigroup
+    - two ways
+    - 1) Implement `concat` as a set **intersection**
+    - 2) Implement `concat` as a set **union**
 - I might be able to use that `jsverify` thing that I've seen lying around
 - Perhaps add tests for some of my other things
 - Finish off work on PaulSet and the Setoid type in general

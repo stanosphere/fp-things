@@ -5,7 +5,7 @@ const {
 
 // apparently this is called Eq in the Haskell world
 
-// - A setoid implements equals
+// - A Setoid implements equals
 // -- equals :: Setoid a => a ~> a -> Boolean
 
 // it also satisfies some laws. here they are
