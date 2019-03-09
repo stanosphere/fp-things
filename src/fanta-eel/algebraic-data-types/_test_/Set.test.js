@@ -2,16 +2,14 @@ const { compose } = require('lodash/fp')
 const assert = require('assert')
 const PaulSet = require('../Set')
 const Num = require('../Num')
-const { equals, numbersToNums } = require('../helpers')
+const { numbersToNums } = require('../helpers')
+const { assertEquals } = require('./testHelpers')
 
 // So I'm going to roughly try and do some property based testing here
 // the idea being to eventually use like js verify or something
 
 // numbersToPaulSet :: [Number] -> PaulSet Num
 const numbersToPaulSet = compose(PaulSet.from, numbersToNums)
-
-// assertEquals :: Setoid a => PaulSet a -> PaulSet a -> Void
-const assertEquals = (x, y) => assert.deepStrictEqual(equals(x)(y), true)
 
 // emptySet :: PaulSet ()
 const emptySet = PaulSet.empty()

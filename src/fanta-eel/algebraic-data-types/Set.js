@@ -90,7 +90,6 @@ const numbersToPaulSet = compose(PaulSet.from, numbersToNums)
 
 const emptySet = numbersToPaulSet([])
 
-
 const numbers = numbersToNums([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 console.log('includes 4?', includes(Num(4))(numbers))
@@ -122,19 +121,6 @@ console.log(
 console.log(
   'does the empty set have 2?',
   emptySet.has(Num(2)),
-)
-
-console.log(
-  'can we add elements to the empty set?',
-  emptySet.add(Num(1)),
-)
-
-console.log(
-  'can we add elements to a set?',
-  emptySet
-    .add(Num(1))
-    .add(Num(2))
-    .add(Num(2)),
 )
 
 console.log(

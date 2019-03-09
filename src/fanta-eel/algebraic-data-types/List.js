@@ -4,6 +4,44 @@ const List = daggy.taggedSum('List', {
   Cons: ['head', 'tail'], Nil: [],
 })
 
+// empty :: List ~> () -> List ()
+List.empty = function () {
+  return List.Nil
+}
+
+// from :: List ~> Array a -> List a
+List.from = function (xs) {
+  return xs.reduceRight(
+    (list, elem) => List.Cons(elem, list),
+    List.Nil,
+  )
+}
+
+// concat List a ~> List a -> List a
+List.prototype.concat = function (that) {
+  return this.cata({
+    // :: (a , List a) -> List a
+    Cons: (head, tail) => List.Cons(head, tail.concat(that)),
+    Nil: () => that,
+  })
+}
+
+// Check the lists' heads, then their tails
+// equals :: Setoid a => List a ~> List a -> Bool
+List.prototype.equals = function (that) {
+  return this.cata({
+    // :: (a , List a) -> Bool
+    Cons: (head, tail) => head.equals(that.head)
+      && tail.equals(that.tail),
+    Nil: () => that.is(List.Nil),
+  })
+}
+
+// isEmpty :: List a ~> () -> Bool
+List.prototype.isEmpty = function () {
+  return this.equals(List.empty())
+}
+
 // map :: List a ~> (a -> b) -> List b
 List.prototype.map = function (f) {
   return this.cata({
@@ -15,33 +53,12 @@ List.prototype.map = function (f) {
   })
 }
 
-// Check the lists' heads, then their tails
-// equals :: Setoid a => List a ~> List a -> Bool
-List.prototype.equals = function (that) {
-  return this.cata({
-    // Note the two different Setoid uses:
-    Cons: (head, tail) => head.equals(that.head) // a
-        && tail.equals(that.tail), // List a
-
-    Nil: () => that.is(List.Nil),
-  })
-}
-
-// .= := =>> >>= =<< --> ->> ||= <> |> <| *** :< :> 9:45
-
-// from :: List ~> Array a -> List a
-List.from = function (xs) {
-  return xs.reduceRight(
-    (acc, x) => List.Cons(x, acc),
-    List.Nil,
-  )
-}
-
 // push :: List a ~> a -> List a
 List.prototype.push = function (x) {
   return List.Cons(x, this)
 }
 
+// reverse :: List a ~> () -> List a
 List.prototype.reverse = function () {
   let list = this
   let res = List.Nil
@@ -57,18 +74,11 @@ List.prototype.reverse = function () {
 // toArray :: List a ~> () -> Array a
 List.prototype.toArray = function () {
   return this.cata({
-    Cons: (x, acc) => [
-      x, ...acc.toArray(),
+    Cons: (head, tail) => [
+      head, ...tail.toArray(),
     ],
     Nil: () => [],
   })
 }
 
 module.exports = List
-
-// [3, 4, 5]
-// console.log(
-//   List.from([1, 2, 3])
-//     .map(x => x + 2)
-//     .toArray(),
-// )
