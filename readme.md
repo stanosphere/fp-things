@@ -48,8 +48,16 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 
 - fanta-eel
   - Notes on Tom Harding's blog
+    - Each on has its own folder eg `Setoid` 
+    - Often I'll update my `algebraic-data-types` folder and give my classes the corresponding methods from the blog post
+      - For instance I blessed my `List` class with the `lte` method after going through the `Ord` post
   - I'll hopefully end up doing some more of his exercises
-  - I've probably also just generally messed around with stuff
+  - I'll probably also invent som e exercises of my own
+  - `algebraic-data-types` 
+    - Contains algebraic data types
+    - Sometimes stolen directly from the blog posts
+    - Sometimes just made up by me
+    - I'm trying to keep them up to date as I go through the blog but I will almost certainly forget some things
 
 - scripts
   - Not gonna lie, I intend for this folder to be an absolute mess

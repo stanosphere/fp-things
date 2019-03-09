@@ -1,8 +1,8 @@
 const { compose } = require('lodash/fp')
 const assert = require('assert')
-const PaulSet = require('./Set')
-const Num = require('./Num')
-const { equals, numbersToNums } = require('./helpers')
+const PaulSet = require('../Set')
+const Num = require('../Num')
+const { equals, numbersToNums } = require('../helpers')
 
 // So I'm going to roughly try and do some property based testing here
 // the idea being to eventually use like js verify or something

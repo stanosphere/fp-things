@@ -1,7 +1,7 @@
 const { zipWith } = require('lodash/fp')
 const {
   Bool, Coord, Line, List,
-} = require('../Daggy/index')
+} = require('../algebraic-data-types/index')
 
 // apparently this is called Eq in the Haskell world
 
