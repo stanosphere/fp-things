@@ -10,11 +10,17 @@ const {
   // filter :: (a -> Bool) -> [a] -> [a]
   filter,
 } = require('lodash/fp')
-const { equals } = require('./algebraic-data-methods')
+const { equals, lte } = require('./algebraic-data-methods')
 const Num = require('./Num')
+
+// unCurry :: (a -> b -> c) -> (a, b) -> c
+const unCurry = f => (x, y) => f(x)(y)
 
 // not :: (a -> Bool) -> a -> Bool
 const not = f => x => !f(x)
+
+// not2 :: (a -> a -> Bool) -> a -> a -> Bool
+const not2 = f => x => y => !f(x)(y)
 
 // this uses conventional equality rather than setoid equality
 // isNotEqual :: a -> b -> Bool
@@ -86,6 +92,12 @@ const insertInSortedArray = x => (xs) => {
   }, [])
 }
 
+// sort :: (a -> a -> Bool) -> [a] -> [a]
+const sort = comp => xs => xs.sort((x, y) => comp(x)(y))
+
+// sortArrayOfOrds :: Ord a => [a] -> [a]
+const sortArrayOfOrds = sort(not2(lte))
+
 module.exports = {
   addToArray,
   arraysAreEqual,
@@ -99,4 +111,5 @@ module.exports = {
   paulSetOfNumsToNumbers,
   removeDuplicates,
   removeFromArray,
+  sortArrayOfOrds,
 }

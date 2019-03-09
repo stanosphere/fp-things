@@ -7,6 +7,7 @@ const {
   insertInSortedArray,
   numbersToNums,
   removeDuplicates,
+  sortArrayOfOrds,
 } = require('../helpers.js')
 
 describe('helpers', () => {
@@ -62,6 +63,25 @@ describe('helpers', () => {
       assert.deepStrictEqual(
         insertInSortedArray(Num(5))(sortedArr),
         numbersToNums([1, 2, 3, 4, 5]),
+      )
+    })
+  })
+
+  describe('sortArrayOfOrds', () => {
+    // sortArrayOfOrds :: Ord a => a -> [a] -> [a]
+    it('given a sorted array of Ords it should return the very same array', () => {
+      const arr = numbersToNums([1, 2, 3, 4])
+      assert.deepStrictEqual(
+        sortArrayOfOrds(arr),
+        arr,
+      )
+    })
+    it('given an unsorted array of Ords it should return a sorted array', () => {
+      const arr = numbersToNums([2, 4, 1, 3])
+      const sortedArr = numbersToNums([1, 2, 3, 4])
+      assert.deepStrictEqual(
+        sortArrayOfOrds(arr),
+        sortedArr,
       )
     })
   })
