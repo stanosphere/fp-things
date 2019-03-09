@@ -41,7 +41,7 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 
 ## What is here?
 
-- algebraic-data-structures
+- mostly-adequate
   - I've basically stolen all the things from the mostly adequate guide
   - I've probably changed and added to them a bit
   - There are also some probably incomprehensible things that are me trying to figure out what on Earth is going on
@@ -57,23 +57,18 @@ This repo is going to be quite messy for now. It's basically just me playing aro
   - And I would quite like to have a reference to things I struggle with
   - Becasue I'll probably struggle with them again
 
-## To Do (3/3/19)
+## To Do (9/3/19)
 
-- Convert my logs into proper tests
-  - I'm looking at you PaulSet file!
-  - I might be able to use that jsverify thing that I've seen lying around
+- Make notes on the Semi group
+  - implement `concat` on the stuff that it can be implemented on
+- I might be able to use that `jsverify` thing that I've seen lying around
 - Perhaps add tests for some of my other things
 - Finish off work on PaulSet and the Setoid type in general
   - Should probably not use the tagged sum thing
   - originally I used it for my set because I thought the empty set should kind of be its own thing
   - removing it would get rid of the cata boiler plate so it's probs worth it
   - I wonder if I could use an applicative for when I'm mapping over a map when I'm verifying that the map method on `PaulSet` does what I want
-- Move on to the next thing in Tom's blog: Ords!
-- Consider using something other than lodash/fp
-  - Although it is good to use what I use at work every day probably
 - Modify List.equal so it doesn't break if the lists have different lengths
 - Think about how you might test List's lte
 - Create an `OrderedSet`
-- Refactor PaulSet so that it uses an ordered list rather than an array as its internal structure
- - caveat: it would need the `Ord` type constraint rather than the more general `Setoid` type constraint. And I like generality lol
- - In that case I think it may be sensible just to do the ordered set thing!
+  - I _could_ give it an ordered list as its internal structure actually
