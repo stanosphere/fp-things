@@ -69,18 +69,18 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 
 - Make notes on the Semi group
   - implement `concat` on the stuff that it can be implemented on
-  - promote `PaulSet` to a semigroup
+  - promote `OrderedSet` to a semigroup
     - two ways
     - 1) Implement `concat` as a set **intersection**
     - 2) Implement `concat` as a set **union**
+    - I feel like maybe I could get a performance bemnefit because the sets are sorted
 - I might be able to use that `jsverify` thing that I've seen lying around
 - Perhaps add tests for some of my other things
   - I wonder if I could use an applicative for when I'm mapping over a map when I'm verifying that the map method on `PaulSet` does what I want
 - Modify List.equal so it doesn't break if the lists have different lengths
 - Think about how you might test List's `lte`
 - Implement a `powerSet` method on `PaulSet`
-- Create an `OrderedSet`
-  - I _could_ give it an ordered list as its internal structure actually
+- Create an `OrderedList`
 - `OrderedSet`
   - I wonder if a binary search would be useful for element insetrtion
     - https://github.com/dsernst/data-structures/blob/master/sprint-two/src/bTree.js

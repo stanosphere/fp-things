@@ -13,8 +13,10 @@ const {
   addToArray,
   arraysHaveTheSameContent,
   includes,
+  intersection,
   removeDuplicates,
   removeFromArray,
+  union,
 } = require('./helpers')
 
 
@@ -62,6 +64,15 @@ PaulSet.prototype.has = function (x) {
   })
 }
 
+// this promotes the PaulSet to a SemiGroup since it obeys the laws for concat
+// intersection :: Setoid a => PaulSet a ~> PaulSet a -> PaulSet a
+PaulSet.prototype.intersection = function (otherSet) {
+  const ys = otherSet.xs
+  return this.cata({
+    Set: compose(PaulSet.Set, intersection(ys)),
+  })
+}
+
 // map :: PaulSet a ~> (a -> b) -> PaulSet b
 PaulSet.prototype.map = function (f) {
   return this.cata({
@@ -80,6 +91,15 @@ PaulSet.prototype.remove = function (x) {
 PaulSet.prototype.toArray = function () {
   return this.cata({
     Set: identity,
+  })
+}
+
+// this promotes the PaulSet to a SemiGroup since it obeys the laws for concat
+// union :: Setoid a => PaulSet a ~> PaulSet a -> PaulSet a
+PaulSet.prototype.union = function (otherSet) {
+  const ys = otherSet.xs
+  return this.cata({
+    Set: compose(PaulSet.Set, union(ys)),
   })
 }
 

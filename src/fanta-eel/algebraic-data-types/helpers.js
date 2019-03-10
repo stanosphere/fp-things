@@ -116,12 +116,34 @@ const sort = comp => xs => xs.sort((x, y) => comp(x)(y))
 // sortArrayOfOrds :: Ord a => [a] -> [a]
 const sortArrayOfOrds = sort(not2(lte))
 
+// this is a special case of concat
+// intersection :: Setoid a => [a] -> [a] -> [a]
+const intersection = xs => (ys) => {
+  const zs = []
+  ys.forEach((y) => {
+    if (includes(y)(xs)) {
+      zs.push(y)
+    }
+  })
+  return zs
+}
+
+// this is a special case of concat
+// union :: Setoid a => [a] -> [a] -> [a]
+const union = xs => (ys) => {
+  let zs = []
+  ys.forEach((y) => { zs = addToArray(y)(zs) })
+  xs.forEach((x) => { zs = addToArray(x)(zs) })
+  return zs
+}
+
 module.exports = {
   addToArray,
   arraysAreEqual,
   arraysHaveTheSameContent,
   includes,
   insertInSortedArray,
+  intersection,
   indexOf,
   isNotEqual,
   isSetoid,
@@ -132,4 +154,5 @@ module.exports = {
   removeFromArray,
   sortArrayOfOrds,
   toNumber,
+  union,
 }

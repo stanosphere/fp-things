@@ -1,5 +1,5 @@
 // concat satisfies Associativity
-// concat :: Semigroup a => a -> a -> a
+// concat :: Setoid b, SemiGroup a => a b -> a b -> a b
 const concat = x => y => x.concat(y)
 
 // equals satisfies Reflexivity, Symmetry, and Transistivity
