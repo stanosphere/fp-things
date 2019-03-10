@@ -91,6 +91,7 @@ const paulSetOfNumsToNumbers = compose(map(toNumber), toArray)
 // insertInSortedArray :: Ord a => a -> [a] -> [a]
 const insertInSortedArray = x => (xs) => {
   let foundPlace = false
+  if (xs.length === 0) return [x]
   const xIsEqualTo = q => x.equals(q)
   const xIsLessThan = q => x.lte(q) && !xIsEqualTo(q)
   const atFinalPosition = j => j === xs.length - 1
@@ -137,6 +138,19 @@ const union = xs => (ys) => {
   return zs
 }
 
+// assumes that xs and ys are both ordered
+// orderedIntersection :: Ord a => [a] -> [a] -> [a]
+const orderedIntersection = intersection
+
+// assumes that xs and ys are both ordered
+//  :: Ord a => [a] -> [a] -> [a]
+const orderedUnion = xs => (ys) => {
+  let zs = []
+  ys.forEach((y) => { zs = addToArray(y)(zs) })
+  xs.forEach((x) => { zs = insertInSortedArray(x)(zs) })
+  return zs
+}
+
 module.exports = {
   addToArray,
   arraysAreEqual,
@@ -149,6 +163,8 @@ module.exports = {
   isSetoid,
   not,
   numbersToNums,
+  orderedIntersection,
+  orderedUnion,
   paulSetOfNumsToNumbers,
   removeDuplicates,
   removeFromArray,

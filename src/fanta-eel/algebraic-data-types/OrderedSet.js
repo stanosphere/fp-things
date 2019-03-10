@@ -13,6 +13,8 @@ const {
   arraysAreEqual,
   includes,
   insertInSortedArray,
+  orderedIntersection,
+  orderedUnion,
   removeDuplicates,
   removeFromArray,
   sortArrayOfOrds,
@@ -57,6 +59,15 @@ OrderedSet.prototype.has = function (x) {
   })
 }
 
+// this promotes the OrderedSet to a SemiGroup since it obeys the laws for concat
+// intersection :: Setoid a => OrderedSet a ~> OrderedSet a -> OrderedSet a
+OrderedSet.prototype.intersection = function (otherSet) {
+  const ys = otherSet.xs
+  return this.cata({
+    Set: compose(OrderedSet.Set, orderedIntersection(ys)),
+  })
+}
+
 // map :: OrderedSet a ~> (a -> b) -> OrderedSet b
 OrderedSet.prototype.map = function (f) {
   return this.cata({
@@ -80,6 +91,15 @@ OrderedSet.prototype.remove = function (x) {
 OrderedSet.prototype.toArray = function () {
   return this.cata({
     Set: identity,
+  })
+}
+
+// this promotes the OrderedSet to a SemiGroup since it obeys the laws for concat
+// union :: Ord a => OrderedSet a ~> OrderedSet a -> OrderedSet a
+OrderedSet.prototype.union = function (otherSet) {
+  const ys = otherSet.xs
+  return this.cata({
+    Set: compose(OrderedSet.Set, orderedUnion(ys)),
   })
 }
 

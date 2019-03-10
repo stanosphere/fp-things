@@ -208,4 +208,59 @@ describe('OrderedSet', () => {
       )
     })
   })
+
+  describe('intersection', () => {
+    it('intersection of any set with the empty set should yield the empty set', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      assertEquals(someSet.intersection(emptySet), emptySet)
+      assertEquals(emptySet.intersection(someSet), emptySet)
+    })
+    it('the intersection of a pair of identical sets must be just that set', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      assertEquals(someSet.intersection(someSet), someSet)
+    })
+    it('the intersection of a pair of sets with no common elements must be the empty set', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      const someOrthogonalSet = numbersToOrderedSet([4, 5, 6])
+      assertEquals(someSet.intersection(someOrthogonalSet), emptySet)
+    })
+    it('the resultant set should be orded regardless of the order of the concat operation', () => {
+      // i.e. intersection should be commutative
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      const someOrthogonalSet = numbersToOrderedSet([1, 3])
+      assertEquals(
+        someSet.intersection(someOrthogonalSet),
+        someOrthogonalSet.intersection(someSet),
+      )
+    })
+  })
+
+  describe('union', () => {
+    it('union of any set with the empty set should yield that set', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      assertEquals(someSet.union(emptySet), someSet)
+      assertEquals(emptySet.union(someSet), someSet)
+    })
+    it('the union of a pair of identical sets must be just that set', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      assertEquals(someSet.union(someSet), someSet)
+    })
+    it('the union of a pair of sets with no common elements must have a cardinality that is equal to the sum of the cardinalities of those two sets', () => {
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      const someOrthogonalSet = numbersToOrderedSet([4, 5, 6])
+      assert.deepStrictEqual(
+        someSet.union(someOrthogonalSet).cardinality(),
+        someSet.cardinality() + someOrthogonalSet.cardinality(),
+      )
+    })
+    it('the resultant set should be orded regardless of the order of the concat operation', () => {
+      // i.e. union should be commutative
+      const someSet = numbersToOrderedSet([1, 2, 3])
+      const someOrthogonalSet = numbersToOrderedSet([4, 5, 6])
+      assertEquals(
+        someSet.union(someOrthogonalSet),
+        someOrthogonalSet.union(someSet),
+      )
+    })
+  })
 })
