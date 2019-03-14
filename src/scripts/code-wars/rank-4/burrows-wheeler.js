@@ -1,3 +1,6 @@
+// this is an overlong solution to the following kata
+// https://www.codewars.com/kata/burrows-wheeler-transformation/train/javascript
+
 const compose = (...fs) => x => fs.reduceRight((res, f) => f(res), x)
 
 // just puts the last element at the start and shifts everything else along
