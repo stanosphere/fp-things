@@ -59,14 +59,14 @@ const nub = xs => xs.filter((x, i) => xs.indexOf(x) === i)
 // buildTree :: ([String], [[String, String]]) -> [String]
 const buildTree = (pairs, num) => {
   // Node :: {
-  //   word :: String
-  //   value :: String
-  //   depth :: Number
-  //   potentialChildren :: [String]
+  //   word :: String,
+  //   value :: String,
+  //   depth :: Number,
+  //   potentialChildren :: [String],
   // }
 
-  // toNode :: (String, String, Number) -> Node
-  const toNode = (parent, value, depth) => ({
+  // toNode :: (String, Number) -> String -> Node
+  const toNode = (parent, depth) => value => ({
     word: value[1] + parent.word,
     value,
     depth,
@@ -75,6 +75,9 @@ const buildTree = (pairs, num) => {
       .filter((_, i) => i !== parent.potentialChildren.indexOf(value)),
     // only want to remove one child from the potential!
   })
+
+  // toDepth :: Number -> Node -> Bool
+  const toDepth = n => nd => nd.depth === n
 
   // the root's value may not be unique hence we use filter rather than nub
   // tree :: [Node]
@@ -87,16 +90,22 @@ const buildTree = (pairs, num) => {
 
   // build tree layer by layer
   for (let i = 0; i < pairs.length; i += 1) {
-    const nodesAtCurrentDepth = tree.filter(nd => nd.depth === i)
+    const nodesAtCurrentDepth = tree.filter(toDepth(i))
     nodesAtCurrentDepth.forEach((nd) => {
       const children = nd.potentialChildren.filter(pair => pair[0] === nd.value[1])
-      tree.push(...nub(children).map(child => toNode(nd, child, i + 1)))
+      tree.push(...nub(children).map(toNode(nd, i + 1)))
     })
   }
 
+  // toMaxDepth :: Node -> Bool
+  const toMaxDepth = toDepth(pairs.length - 1)
+
+  // toWord :: Node -> String
+  const toWord = nd => nd.word
+
   return tree
-    .filter(nd => nd.depth === pairs.length - 1)
-    .map(nd => nd.word)
+    .filter(toMaxDepth)
+    .map(toWord)
 }
 
 // decode :: [String, Number] -> String
