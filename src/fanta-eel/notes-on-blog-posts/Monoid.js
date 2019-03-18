@@ -183,3 +183,11 @@ console.log(
 
 // fold :: (Number -> Pair (Sum Number, Max Number)) -> [a] -> Pair (Sum Number, Max Number)
 console.log(fold(SumAndMax2)([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).toString())
+
+// some more thoughts from the other blog post
+
+// A monoid is a structure that can be appended to other instances of the same structure,
+// It must also have an identity instance
+// The append method is associative
+// However in the above I've used the word concat from fantasy land rather than append
+// The associativity of this append operation makes parallelisation good

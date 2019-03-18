@@ -1,0 +1,2 @@
+# Ignore files to do with the purescript part of this repo
+**/purescript/*
