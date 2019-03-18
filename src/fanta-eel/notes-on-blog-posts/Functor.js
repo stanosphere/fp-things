@@ -38,7 +38,7 @@
 // when a value is put into a functor it is said to be lifted into the functor
 
 // - Common examples
-// -- MaybeMaybe a, Represent a possibly null value.
+// -- Maybe a, Represent a possibly null value.
 // -- Either e a, Represent a value or exception.
 // -- Array a, Represent a number of values.
 // -- Function: x -> a, Represent a mapping to values.
