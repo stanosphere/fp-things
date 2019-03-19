@@ -1,3 +1,4 @@
+const { Either } = require('../algebraic-data-types/functors/index')
 // We're finally here, at the first scary sounding one!
 // As well as the ususal blo post, the following resource exists:
 // http://www.tomharding.me/2016/12/31/yippee-ki-yay-other-functors/
@@ -45,3 +46,46 @@
 
 // Now seems like a suitable time to go through the other article and
 // explore some of these examples in more detail
+
+// Either is kind of special because it holds two values simultaneously
+// It's essentially a try-catch but much nicer!
+// Let's look at it in action
+
+// Either.of is essentially a way of handling possibly null things
+console.log(Either.of(1, 2).toString())
+
+// so what in the hell is the point of this?
+// Here is why we like it:
+
+// getLight :: Int -> Either String String
+const getLight = i => Either.of(
+  `${i} is not a valid choice!`,
+  ['Red', 'Amber', 'Green'][i],
+)
+
+// getLight :: Int -> String
+const transformLight = i => getLight(i)
+  .map(x => x.toUpperCase())
+  .map(x => `The light is ${x}`)
+  .fold(
+    e => `ERROR: ${e}`,
+    s => `SUCCESS: ${s}`,
+  )
+
+// In this rather contrived example the Either has handled null values for us
+// It means that we can do different behaviours for different events
+// But not need to worry about nulls until the very end
+// This sort of structure is perfect for error handling
+// The reason this works is that once the left side has been reached there
+// is no going back and any attempts to map just leave the value alone until we fold
+// This is somewhat akin to how the Maybe functor works but rather than having
+// Nothing, we have something that we can process like an error message!
+// Beautiful
+// This reminds me a little of the promise catch method
+// But kind of the other way around
+
+console.log(transformLight(2))
+console.log(transformLight(4))
+
+// the only other thing I need to do with Either is convince myself that
+// it does indeed satisfy the Functor laws!
