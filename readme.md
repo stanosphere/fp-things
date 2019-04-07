@@ -67,8 +67,6 @@ This repo is going to be quite messy for now. It's basically just me playing aro
 
 ## To Do (9/3/19)
 
-- Make notes on monoid
-  - read the other blog post he did
 - Maybe split up the helpers file as it's getting quite big
 - I might be able to use that `jsverify` thing that I've seen lying around
 - Perhaps add tests for some of my other things

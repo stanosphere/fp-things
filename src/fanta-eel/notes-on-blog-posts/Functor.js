@@ -6,8 +6,8 @@ const { Either } = require('../algebraic-data-types/functors/index')
 // - a Functor implements map
 // -- map :: Functor f => f a ~> (a -> b) -> f b
 
-// It satisfies the identity composition laws
-// suppose m is a Monoid
+// It satisfies the identity and composition laws
+// suppose u is a Functor
 // -- Functor u => ...
 
 // - Identity
@@ -89,3 +89,7 @@ console.log(transformLight(4))
 
 // the only other thing I need to do with Either is convince myself that
 // it does indeed satisfy the Functor laws!
+
+// So it very obviously satisfies the functor laws if it is in the Left mode
+// because mapping just doesn't do anything
+// And it's also kind of obvious that the same is true of the right mode
