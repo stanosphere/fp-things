@@ -74,6 +74,14 @@ List.prototype.push = function (x) {
   return List.Cons(x, this)
 }
 
+// reduce :: List a ~> ((b, a) -> b, b) -> b
+List.prototype.reduce = function (f, acc) {
+  return this.cata({
+    Cons: (head, tail) => tail.reduce(f, f(acc, head)),
+    Nil: () => acc,
+  })
+}
+
 // reverse :: List a ~> () -> List a
 List.prototype.reverse = function () {
   let list = this

@@ -85,7 +85,7 @@ show(doubleLoop(x => y => x + y)([1, 2, 3])([1, 2, 3]))
 
 // I've turned my maybe into an Apply now!
 
-// Tak implements Apply
+// Task implements Apply
 
 // Convert a fetch promise to a Task.
 const getJSON = url => new Task((rej, res) => fetch(url).then(res).catch(rej))
@@ -97,3 +97,7 @@ const renderPage = users => (posts) => {
 // A Promise of a web page.
 // page :: Task e HTML
 const page = lift2(renderPage)(getJSON('/users'))(getJSON('/posts'))
+
+// so all ap really does is let us combine wrapped things
+// without ever worrying about unwrapping them
+// which is actually kind of cool
