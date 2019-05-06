@@ -49,8 +49,8 @@ List.prototype.lte = function (that) {
     Cons: (thisHead, thisTail) => that.cata({
       Cons: (thatHead, thatTail) => (
         thisHead.equals(thatHead)
-          ? lte(thisTail, thatTail)
-          : lte(thisHead, thatHead)
+          ? lte(thisTail)(thatTail)
+          : lte(thisHead)(thatHead)
       ),
       Nil: () => false,
     }),
